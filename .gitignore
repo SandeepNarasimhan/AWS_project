@@ -3,3 +3,8 @@
 __pycache__/
 
 .venv/
+.env
+hello_aws_user_credentials.csv
+hello_aws_user_accessKeys.csv
+data/
+downloaded_data.csv
