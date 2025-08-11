@@ -101,11 +101,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> <span class="at">--version</span> </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> configure</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="9" type="1">
+<section id="method-1-using-boto3" class="level3">
+<h3 class="anchored" data-anchor-id="method-1-using-boto3">Method 1: Using boto3</h3>
+<ol type="1">
 <li><strong>pip install boto3</strong>, boto3 helps us connect to s3 from local machine</li>
 <li>setup resource and bucket to upload or download files</li>
 </ol>
-<div id="a75e3ab7" class="cell" data-execution_count="1">
+<div id="f3eb72d5" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#### Resource</span></span>
@@ -120,7 +122,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#### Downloading a file</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>bucket.download_file(Key<span class="op">=</span><span class="st">'synthetic_data1.csv'</span>, Filename<span class="op">=</span><span class="st">'downloaded_data.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>where: - Key is the name of the file in the s3 bucket - Filename is the path or name of the file in the local machine</p>
+<p>where:</p>
+<ul>
+<li>Key is the name of the file in the s3 bucket</li>
+<li>Filename is the path or name of the file in the local machine</li>
+</ul>
+</section>
+<section id="method-2-download-and-upload-objects-with-presigned-urls1" class="level3">
+<h3 class="anchored" data-anchor-id="method-2-download-and-upload-objects-with-presigned-urls1">Method 2: Download and upload objects with presigned URLs<sup><a href="#ref1">1</a></sup></h3>
+<p>You can use presigned URLs to grant time limited access to objects in Amazon S3 without updating your bucket policy. A presigned URL can be entered in a browser or used by a program to download or update an object.</p>
+<p>You can use the presigned URL multiple times, up to the expiration date and time.</p>
+<p><strong>When you create a presigned URL, you must provide your security credentials, and then specify the following:</strong></p>
+<ul>
+<li>An Amazon S3 bucket</li>
+<li>An object key (if downloading this object will be in your Amazon S3 bucket, if uploading this is the file name to be uploaded)</li>
+<li>An HTTP method (GET for downloading objects, PUT for uploading, HEAD for reading object metadata, etc)</li>
+<li>An expiration time interval</li>
+</ul>
+<section id="using-cli" class="level4">
+<h4 class="anchored" data-anchor-id="using-cli"><strong>Using CLI</strong></h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> s3 presign s3://bucket_name/file_name <span class="at">--expires-in</span> 200 <span class="at">--region</span> region_name <span class="at">--endpoint-url</span> https://s3.region_name.amazonaws.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>where:</p>
+<ul>
+<li><strong>bucket_name</strong>: name of the s3 bucket where the file ispresent</li>
+<li><strong>file_name</strong>: name of the file with extension within the s3 bucket specified</li>
+<li><strong>–expires-in</strong>: expiration time limit</li>
+<li><strong>–region</strong>: name of the region where you have created the bucket</li>
+<li><strong>–endpoint-url</strong>: endpoint where you want to expose the download option</li>
+</ul>
+<p><strong>Note: Region name within endpoint is mandatory</strong></p>
+<p>This generates the url which can be shared with respected members.</p>
+<p><img src="https://raw.githubusercontent.com/aws/amazon-sagemaker-examples/main/_static/sagemaker-banner.png" class="img-fluid"></p>
+<p>Source: <strong>AWS</strong></p>
+</section>
+</section>
+</section>
+<section id="onboard-to-amazon-sagemaker-studio-lab" class="level2">
+<h2 class="anchored" data-anchor-id="onboard-to-amazon-sagemaker-studio-lab"><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/studio-lab-onboard.html">Onboard to Amazon SageMaker Studio Lab</a></h2>
+<ol type="1">
+<li><strong>Request a Studio Lab account</strong></li>
+</ol>
+<p>Before you can sign up for a Studio Lab account, your account request needs to be approved. This review process takes up to five business days. Once approved, you’ll receive an email containing a link to the Studio Lab registration page.</p>
+<ol start="2" type="1">
+<li>Create a Studio Lab account</li>
+<li>Sign in to Studio Lab</li>
+</ol>
+</section>
+<section id="refference" class="level2">
+<h2 class="anchored" data-anchor-id="refference">Refference:</h2>
+<section id="download-and-upload-objects-with-presigned-urls" class="level3">
+<h3 class="anchored" data-anchor-id="download-and-upload-objects-with-presigned-urls"><span id="ref1">[1]</span> <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html">Download and upload objects with presigned URLs</a></h3>
+</section>
+<section id="aws-sagemaker-examples" class="level3">
+<h3 class="anchored" data-anchor-id="aws-sagemaker-examples"><a href="https://github.com/aws/amazon-sagemaker-examples?tab=readme-ov-file">AWS Sagemaker examples</a></h3>
+<ul>
+<li><a href="https://github.com/aws/amazon-sagemaker-examples/blob/default/%20%20%20%20%20%20%20%20end_to_end_ml_lifecycle/sm-autopilot_linear_regression_california_housing.ipynb">Housing Price Prediction with Amazon SageMaker Autopilot</a></li>
+</ul>
+</section>
+<section id="getting-started" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started"><a href="https://docs.aws.amazon.com/next-generation-sagemaker/latest/userguide/what-is-sagemaker.html">Getting started</a></h3>
+</section>
 </section>
 
 </main>

@@ -51,3 +51,12 @@ def create_bucket(bucket_name, region=None):
 
 for bucket in s3.buckets.all():
     print(bucket.name)
+
+
+boto3.Session().region_name
+session
+
+
+aws s3 presign s3://my-first-s3-bucket-u/synthetic_data1.csv --expires-in 2 --region ap-southeast-2 --endpoint-url https://s3.ap-southeast-2.amazonaws.com
+
+aws s3 presign s3://amzn-s3-demo-bucket/mydoc.txt --expires-in 604800 

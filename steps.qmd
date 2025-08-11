@@ -23,9 +23,10 @@ execute:
 aws --version 
 aws configure
 ```
+### Method 1: Using boto3
 
-9. **pip install boto3**, boto3 helps us connect to s3 from local machine
-10. setup resource and bucket to upload or download files
+1. **pip install boto3**, boto3 helps us connect to s3 from local machine
+2. setup resource and bucket to upload or download files
 
 ```{python}
 import boto3
@@ -44,5 +45,62 @@ bucket.download_file(Key='synthetic_data1.csv', Filename='downloaded_data.csv')
 ```
 
 where:
-    - Key is the name of the file in the s3 bucket
-    - Filename is the path or name of the file in the local machine
+
+- Key is the name of the file in the s3 bucket
+- Filename is the path or name of the file in the local machine
+  
+    
+### Method 2: Download and upload objects with presigned URLs<sup>[1](#ref1)</sup>
+    
+You can use presigned URLs to grant time limited access to objects in Amazon S3 without updating your bucket policy. A presigned URL can be entered in a browser or used by a program to download or update an object.
+
+You can use the presigned URL multiple times, up to the expiration date and time.
+
+**When you create a presigned URL, you must provide your security credentials, and then specify the following:**
+
+- An Amazon S3 bucket
+- An object key (if downloading this object will be in your Amazon S3 bucket, if uploading this is the file name to be uploaded)
+- An HTTP method (GET for downloading objects, PUT for uploading, HEAD for reading object metadata, etc)
+- An expiration time interval
+
+#### **Using CLI**
+```{.bash}
+aws s3 presign s3://bucket_name/file_name --expires-in 200 --region region_name --endpoint-url https://s3.region_name.amazonaws.com
+```
+where<sup>[2](#ref2)</sup>:
+
+- **bucket_name**: name of the s3 bucket where the file ispresent
+- **file_name**: name of the file with extension within the s3 bucket specified
+- **--expires-in**: expiration time limit
+- **--region**: name of the region where you have created the bucket
+- **--endpoint-url**: endpoint where you want to expose the download option
+
+**Note: Region name within endpoint is mandatory**
+
+This generates the url which can be shared with respected members.
+        
+![](https://raw.githubusercontent.com/aws/amazon-sagemaker-examples/main/_static/sagemaker-banner.png)
+
+Source: **AWS**
+
+## [Onboard to Amazon SageMaker Studio Lab](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-lab-onboard.html)
+
+1. **Request a Studio Lab account**
+
+Before you can sign up for a Studio Lab account, your account request needs to be approved. This review process takes up to five business days. Once approved, you’ll receive an email containing a link to the Studio Lab registration page.
+
+2. Create a Studio Lab account
+3. Sign in to Studio Lab
+
+
+## Refference:
+
+### <span id="ref1">[1]</span> [Download and upload objects with presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html)
+
+### <span id="ref2">[2]</span>[S3 presign](https://docs.aws.amazon.com/cli/latest/reference/s3/presign.html)
+
+### [AWS Sagemaker examples](https://github.com/aws/amazon-sagemaker-examples?tab=readme-ov-file)
+
+- [Housing Price Prediction with Amazon SageMaker Autopilot](https://github.com/aws/amazon-sagemaker-examples/blob/default/%20%20%20%20%20%20%20%20end_to_end_ml_lifecycle/sm-autopilot_linear_regression_california_housing.ipynb)
+
+### [Getting started](https://docs.aws.amazon.com/next-generation-sagemaker/latest/userguide/what-is-sagemaker.html)
