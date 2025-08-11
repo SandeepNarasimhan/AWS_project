@@ -107,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>pip install boto3</strong>, boto3 helps us connect to s3 from local machine</li>
 <li>setup resource and bucket to upload or download files</li>
 </ol>
-<div id="f3eb72d5" class="cell" data-execution_count="1">
+<div id="3aa36a85" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#### Resource</span></span>
@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="using-cli" class="level4">
 <h4 class="anchored" data-anchor-id="using-cli"><strong>Using CLI</strong></h4>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> s3 presign s3://bucket_name/file_name <span class="at">--expires-in</span> 200 <span class="at">--region</span> region_name <span class="at">--endpoint-url</span> https://s3.region_name.amazonaws.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>where:</p>
+<p>where<sup><a href="#ref2">2</a></sup>:</p>
 <ul>
 <li><strong>bucket_name</strong>: name of the s3 bucket where the file ispresent</li>
 <li><strong>file_name</strong>: name of the file with extension within the s3 bucket specified</li>
@@ -172,6 +172,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="refference">Refference:</h2>
 <section id="download-and-upload-objects-with-presigned-urls" class="level3">
 <h3 class="anchored" data-anchor-id="download-and-upload-objects-with-presigned-urls"><span id="ref1">[1]</span> <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html">Download and upload objects with presigned URLs</a></h3>
+</section>
+<section id="s3-presign" class="level3">
+<h3 class="anchored" data-anchor-id="s3-presign"><span id="ref2">[2]</span><a href="https://docs.aws.amazon.com/cli/latest/reference/s3/presign.html">S3 presign</a></h3>
 </section>
 <section id="aws-sagemaker-examples" class="level3">
 <h3 class="anchored" data-anchor-id="aws-sagemaker-examples"><a href="https://github.com/aws/amazon-sagemaker-examples?tab=readme-ov-file">AWS Sagemaker examples</a></h3>
