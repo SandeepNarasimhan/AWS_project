@@ -1,6 +1,6 @@
-# How to download and upload files to s3
-
 ![alt text](s3_logo.png)
+
+# How to download and upload files to s3
 
 1. Create an AWS account (if not created already)
 2. Go to AWS console and search USERs

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>How to download and upload files to s3</title>
+<title>steps</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,26 +77,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">How to download and upload files to s3</h1>
-</div>
 
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
 
 
 <p><img src="s3_logo.png" class="img-fluid"></p>
+<section id="how-to-download-and-upload-files-to-s3" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-download-and-upload-files-to-s3">“How to download and upload files to s3”</h2>
 <ol type="1">
 <li>Create an AWS account (if not created already)</li>
 <li>Go to AWS console and search USERs</li>
@@ -119,7 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>pip install boto3</strong>, boto3 helps us connect to s3 from local machine</li>
 <li>setup resource and bucket to upload or download files</li>
 </ol>
-<div id="3d7a8e3c" class="cell" data-execution_count="1">
+<div id="a75e3ab7" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#### Resource</span></span>
@@ -135,6 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>bucket.download_file(Key<span class="op">=</span><span class="st">'synthetic_data1.csv'</span>, Filename<span class="op">=</span><span class="st">'downloaded_data.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>where: - Key is the name of the file in the s3 bucket - Filename is the path or name of the file in the local machine</p>
+</section>
 
 </main>
 <!-- /main column -->

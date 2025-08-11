@@ -14,7 +14,6 @@ bucket = s3.Bucket("my-first-s3-bucket-u")
 
 ## uploading a file
 bucket.upload_file(Key='synthetic_data3.csv', Filename='data/synthetic_data3.csv')
-
 bucket.download_file(Key='synthetic_data1.csv', Filename='downloaded_data.csv')
 
 for bucket in s3.buckets.all():
